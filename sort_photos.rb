@@ -31,4 +31,12 @@ class SortPhotos
     FileUtils.mv(photo, "#{@target_directory}/#{date}/#{filename}")
   end
 
+  def sort_photos dir
+    Dir.glob("#{dir}/*.*") do |filename|
+      next if filename == '.' or filename == '..' or !filename.match(/jpe?g$/i)
+
+      move_photo filename
+    end
+  end
+
 end

@@ -45,6 +45,26 @@ class SortPhotosTest < Test::Unit::TestCase
     assert_false File.exist?(@example_photo_path)
   end
 
+  def test_sort_photos
+    test_photos = []
+    test_photos << {'name' => 'IMG_6036.jpg', 'date' => '2020-08-27'}
+    test_photos << {'name' => 'IMG_6183.jpg', 'date' => '2020-08-31'}
+    test_photos << {'name' => 'IMG_6216.jpg', 'date' => '2020-09-01'}
+    test_photos << {'name' => 'IMG_6239.jpg', 'date' => '2020-09-03'}
+    test_photos << {'name' => 'IMG_6243.jpg', 'date' => '2020-09-03'}
+
+    @sort_photos.sort_photos @example_photos_directory
+
+    test_photos.each do |photo|
+      example_photo_path = "#{@example_photos_directory}/#{photo['name']}"
+      example_photo_date = photo['date']
+      target_photo = "#{@target_directory}/#{example_photo_date}/#{photo['name']}"
+
+      assert_true File.exist?(target_photo)
+      assert_false File.exist?(example_photo_path)
+    end
+  end
+
   private
 
   def unzip_examples(destination, file)
