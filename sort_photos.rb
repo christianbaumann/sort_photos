@@ -16,7 +16,8 @@ class SortPhotos
 
   def create_directory photo
     date = get_date(photo)
-    FileUtils.mkdir_p "#{@target_directory}/#{date}"
+    directories_created = FileUtils.mkdir_p "#{@target_directory}/#{date}"
+    directories_created[0]
   end
 
 end
