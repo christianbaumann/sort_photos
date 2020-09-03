@@ -6,4 +6,10 @@ class SortPhotosTest < Test::Unit::TestCase
     @sort_photos = SortPhotos.new
   end
 
+  def test_get_year
+    # sort_photos = SortPhotos.new
+
+    assert_equal '2020', @sort_photos.get_year('example_photos/IMG_6036.jpg'), "Years don't match"
+  end
+
 end

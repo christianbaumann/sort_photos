@@ -1,7 +1,6 @@
 class SortPhotos
 
-  def initialize
-    super
+  def get_year photo
   end
 
 end
