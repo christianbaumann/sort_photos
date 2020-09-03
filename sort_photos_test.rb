@@ -5,23 +5,19 @@ require_relative 'sort_photos'
 
 class SortPhotosTest < Test::Unit::TestCase
   def setup
-    @example_photo = 'example_photos/IMG_6036.jpg'
+    @example_photos_directory = 'example_photos'
+    @example_photo = "#{@example_photos_directory}/IMG_6036.jpg"
 
     @sort_photos = SortPhotos.new
 
-    file = 'example_photos/example_photos.zip'
-    destination = 'example_photos'
-
-    unzip_examples(destination, file)
+    file = "#{@example_photos_directory}/example_photos.zip"
+    unzip_examples(@example_photos_directory, file)
   end
 
   def teardown
     FileUtils.rm_rf @sort_photos.target_directory
 
-    # file = 'example_photos/example_photos.zip'
-    # destination = 'example_photos'
-    #
-    # unzip_examples(destination, file)
+    Dir.glob("#{@example_photos_directory}/*.jpg").each { |file| File.delete(file)}
   end
 
   def test_get_date
