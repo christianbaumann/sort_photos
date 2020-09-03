@@ -28,4 +28,18 @@ class SortPhotosTest < Test::Unit::TestCase
     assert_equal 'IMG_6036.jpg', @sort_photos.get_filename(@example_photo), "Filenames don't match"
   end
 
+  def test_move_photo
+    date = '2020-08-27'
+    target_directory = @sort_photos.target_directory
+    example_photo_filename = 'IMG_6036.jpg'
+
+    # TODO Refactor date into variable
+    target_photo = "#{@sort_photos.target_directory}/#{date}/#{example_photo_filename}"
+
+    @sort_photos.move_photo @example_photo
+
+    assert_true File.exist?(target_photo)
+    assert_false File.exist?(@example_photo)
+  end
+
 end

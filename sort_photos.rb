@@ -24,5 +24,11 @@ class SortPhotos
     photo.split('/')[1]
   end
 
-  # def move_photo photo
+  def move_photo photo
+    date = get_date photo
+    sub_directory = create_directory photo
+    filename = get_filename photo
+    FileUtils.mv(photo, "#{@target_directory}/#{date}/#{filename}")
+  end
+
 end
