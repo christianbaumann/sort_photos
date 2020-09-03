@@ -20,4 +20,9 @@ class SortPhotos
     directories_created[0]
   end
 
+  def get_filename photo
+    photo.split('/')[1]
+  end
+
+  # def move_photo photo
 end
