@@ -1,4 +1,6 @@
 require 'test/unit'
+require 'zip'
+
 require_relative 'sort_photos'
 
 class SortPhotosTest < Test::Unit::TestCase
@@ -6,10 +8,20 @@ class SortPhotosTest < Test::Unit::TestCase
     @example_photo = 'example_photos/IMG_6036.jpg'
 
     @sort_photos = SortPhotos.new
+
+    file = 'example_photos/example_photos.zip'
+    destination = 'example_photos'
+
+    unzip_examples(destination, file)
   end
 
   def teardown
     FileUtils.rm_rf @sort_photos.target_directory
+
+    # file = 'example_photos/example_photos.zip'
+    # destination = 'example_photos'
+    #
+    # unzip_examples(destination, file)
   end
 
   def test_get_date
@@ -40,6 +52,19 @@ class SortPhotosTest < Test::Unit::TestCase
 
     assert_true File.exist?(target_photo)
     assert_false File.exist?(@example_photo)
+  end
+
+  private
+
+  def unzip_examples(destination, file)
+    FileUtils.mkdir_p(destination)
+
+    Zip::File.open(file) do |zip_file|
+      zip_file.each do |f|
+        fpath = File.join(destination, f.name)
+        zip_file.extract(f, fpath) unless File.exist?(fpath)
+      end
+    end
   end
 
 end
