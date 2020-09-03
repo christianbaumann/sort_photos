@@ -8,6 +8,10 @@ class SortPhotosTest < Test::Unit::TestCase
     @sort_photos = SortPhotos.new
   end
 
+  def teardown
+    FileUtils.rm_rf @sort_photos.target_directory
+  end
+
   def test_get_date
     assert_equal '2020-08-27', @sort_photos.get_date(@example_photo), "Dates don't match"
   end
