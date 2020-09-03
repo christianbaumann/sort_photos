@@ -21,7 +21,7 @@ class SortPhotosTest < Test::Unit::TestCase
     target_directory = @sort_photos.target_directory
 
     assert_equal "#{target_directory}/#{date}", @sort_photos.create_directory(@example_photo), "Directory path is not correct"
-    assert_equal true, File.directory?("#{target_directory}/#{date}"), "Directory doesn't exist"
+    assert_true File.directory?("#{target_directory}/#{date}"), "Directory doesn't exist"
   end
 
 end
